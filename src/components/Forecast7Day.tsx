@@ -48,37 +48,34 @@ export function Forecast7Day(props: {
         return (
           <div
             key={t}
-            className="flex items-center gap-3 rounded-2xl px-2 py-2 text-sm"
+            className="flex items-center rounded-2xl px-2 py-2 text-sm"
           >
-            {/* 1. DZIEŃ TYGODNIA - Stała szerokość (w-10 lub w-12) zapobiega przesunięciom */}
-            <div className="w-12 text-xs font-semibold text-zinc-200">
+            {/* day */}
+            <div className="w-[50px] shrink-0 text-xs font-semibold text-zinc-200">
               {formatDayLabel(t, idx)}
             </div>
 
-            {/* 2. IKONA - shrink-0 sprawia, że nigdy nie zniknie ani się nie zmniejszy */}
-            <div className="flex w-6 justify-center shrink-0">
+            {/* icon */}
+            <div className="flex w-[40px] shrink-0 justify-center">
               <condition.Icon className="h-5 w-5 text-zinc-300" />
             </div>
 
-            {/* 3. KONTENER TEMPERATUR I PASKA - zajmuje całą resztę miejsca */}
-            <div className="ml-auto flex flex-1 items-center justify-end gap-3">
-              {/* Temperatura MIN - stała szerokość dla wyrównania ikon księżyca w pionie */}
-              <div className="flex w-10 items-center justify-end gap-1 text-right text-xs font-semibold text-zinc-500">
-                <span>{Math.round(lo)}°</span>
-              </div>
+            {/* min temp */}
+            <div className="w-[35px] shrink-0 text-right text-xs font-semibold text-zinc-500">
+              {Math.round(lo)}°
+            </div>
 
-              {/* PASEK - flex-1 pozwoli mu się zwężać na bardzo małych telefonach */}
-              <div className="relative h-2 w-24 sm:w-28 flex-1 sm:flex-none overflow-hidden rounded-full bg-zinc-800/60">
-                <div
-                  className="absolute top-0 h-full rounded-full bg-gradient-to-r from-sky-400 via-emerald-300 to-amber-300"
-                  style={{ left: `${leftPct}%`, width: `${widthPct}%` }}
-                />
-              </div>
+            {/* temp bar */}
+            <div className="relative mx-3 h-2 min-w-[60px] flex-1 overflow-hidden rounded-full bg-zinc-800/60">
+              <div
+                className="absolute top-0 h-full rounded-full bg-gradient-to-r from-sky-400 via-emerald-300 to-amber-300"
+                style={{ left: `${leftPct}%`, width: `${widthPct}%` }}
+              />
+            </div>
 
-              {/* Temperatura MAX - stała szerokość */}
-              <div className="flex w-10 items-center gap-1 text-xs font-semibold text-zinc-200">
-                <span>{Math.round(hi)}°</span>
-              </div>
+            {/* max temp */}
+            <div className="w-[15px] shrink-0 text-left text-xs font-semibold text-zinc-200">
+              {Math.round(hi)}°
             </div>
           </div>
         );
