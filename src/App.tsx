@@ -133,7 +133,7 @@ export default function App() {
         >
           <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4">
             <div className="flex shrink-0 items-center gap-2">
-              <Cloud className="h-5 w-5 text-sky-400" />
+              <img width="25px" src="/public/icon192.png" />
               <span className="text-sm font-semibold tracking-wide text-zinc-100">
                 SkyCast
               </span>
