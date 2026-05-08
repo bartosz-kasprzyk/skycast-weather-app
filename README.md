@@ -1,4 +1,4 @@
-# SkyCast – Modern Weather Dashboard
+# <img width="25px" src="/public/icon192.png" /> SkyCast – Weather App
 
 
 A sleek, high-performance weather application built with a focus on data visualization and modern UI/UX principles. This project explores the synergy between React, TypeScript, and AI-assisted development workflows.
