@@ -1,13 +1,13 @@
 # SkyCast – Modern Weather Dashboard
 
 
-
 A sleek, high-performance weather application built with a focus on data visualization and modern UI/UX principles. This project explores the synergy between React, TypeScript, and AI-assisted development workflows.
 
+## Demo
 
+https://skycast-weather-app-bk.vercel.app/
 
 ## ✨ Features
-
 
 
 - **Real-time Weather Data:** Accurate forecasts for any city worldwide.
@@ -19,9 +19,7 @@ A sleek, high-performance weather application built with a focus on data visuali
 - **Metric Tiles:** Clean UI for Wind, Humidity, Visibility, Pressure, UV Index, and more.
 
 
-
 ## 🛠️ Tech Stack
-
 
 
 - **Framework:** React 18 with Vite
@@ -33,7 +31,6 @@ A sleek, high-performance weather application built with a focus on data visuali
 - **Icons:** Lucide React
 
 - **Development:** Built using Cursor AI & Claude 4.6 Sonnet for rapid prototyping and clean architecture.
-
 
 
 ## 🚀 Development Workflow
