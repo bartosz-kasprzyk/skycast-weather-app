@@ -1,9 +1,9 @@
-import type { ForecastResponse } from '../types/openMeteo'
-import { getConditionForWeatherCode } from '../lib/weatherCodes'
+import type { ForecastResponse } from "../types/openMeteo";
+import { getConditionForWeatherCode } from "../lib/weatherCodes";
 
 export function CurrentWeatherCard(props: {
-  forecast: ForecastResponse | null
-  isLoading?: boolean
+  forecast: ForecastResponse | null;
+  isLoading?: boolean;
 }) {
   if (props.isLoading || !props.forecast) {
     return (
@@ -14,14 +14,14 @@ export function CurrentWeatherCard(props: {
           <div className="h-4 w-56 rounded bg-zinc-800/40" />
         </div>
       </div>
-    )
+    );
   }
 
-  const { current, daily } = props.forecast
-  const condition = getConditionForWeatherCode(current.weather_code)
+  const { current, daily } = props.forecast;
+  const condition = getConditionForWeatherCode(current.weather_code);
 
-  const hi = daily.temperature_2m_max[0]
-  const lo = daily.temperature_2m_min[0]
+  const hi = daily.temperature_2m_max[0];
+  const lo = daily.temperature_2m_min[0];
 
   return (
     <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
@@ -30,7 +30,7 @@ export function CurrentWeatherCard(props: {
           <div className="text-7xl font-light tracking-tight sm:text-8xl">
             {Math.round(current.temperature_2m)}°
           </div>
-          <div className="pb-3">
+          <div className="pb-3 hidden sm:block">
             <condition.Icon className="h-10 w-10 text-amber-300" />
           </div>
         </div>
@@ -38,11 +38,10 @@ export function CurrentWeatherCard(props: {
           {condition.label}
         </div>
         <div className="mt-2 text-xs text-zinc-400">
-          H: {Math.round(hi)}° &nbsp; L: {Math.round(lo)}° &nbsp; Feels like{' '}
+          H: {Math.round(hi)}° &nbsp; L: {Math.round(lo)}° &nbsp; Feels like{" "}
           {Math.round(current.apparent_temperature)}°
         </div>
       </div>
     </div>
-  )
+  );
 }
-
