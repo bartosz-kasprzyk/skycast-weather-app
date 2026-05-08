@@ -8,6 +8,7 @@ import { HourlyForecast } from "./components/HourlyForecast.tsx";
 import { Forecast7Day } from "./components/Forecast7Day.tsx";
 import { MetricCard } from "./components/MetricCard.tsx";
 import { getConditionForWeatherCode } from "./lib/weatherCodes.ts";
+import AuroraBackground from "./components/AuroraBackground/AuroraBackground.tsx";
 
 const DEFAULT_PLACE: GeocodingPlace = {
   id: 5391959,
@@ -120,158 +121,162 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen text-zinc-100">
-      <div
-        className="glass sticky top-0 z-10 !border-x-0 !border-t-0"
-        style={{
-          backgroundColor: "rgba(255,255,255,0.15)",
-          backdropFilter: "blur(8px)",
-        }}
-      >
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4">
-          <div className="flex shrink-0 items-center gap-2">
-            <Cloud className="h-5 w-5 text-sky-400" />
-            <span className="text-sm font-semibold tracking-wide text-zinc-100">
-              SkyCast
-            </span>
+    <div className="relative min-h-screen text-zinc-100">
+      <AuroraBackground />
+      <div className="relative z-10 flex min-h-screen flex-col">
+        <div
+          className="glass sticky top-0 z-20 !border-x-0 !border-t-0"
+          style={{
+            backgroundColor: "rgba(255,255,255,0.08)",
+            backdropFilter: "blur(12px)",
+          }}
+        >
+          <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4">
+            <div className="flex shrink-0 items-center gap-2">
+              <Cloud className="h-5 w-5 text-sky-400" />
+              <span className="text-sm font-semibold tracking-wide text-zinc-100">
+                SkyCast
+              </span>
+            </div>
+            <SearchBar
+              placeholder="Search for a city..."
+              isLoading={isLoading}
+              debounceMs={250}
+              fetchOptions={fetchOptions}
+              onSelect={(p) => {
+                setError(null);
+                setPlace(p);
+              }}
+            />
           </div>
-          <SearchBar
-            placeholder="Search for a city..."
-            isLoading={isLoading}
-            debounceMs={250}
-            fetchOptions={fetchOptions}
-            onSelect={(p) => {
-              setError(null);
-              setPlace(p);
-            }}
-          />
         </div>
-      </div>
 
-      <div className="mx-auto w-full max-w-6xl px-4 pb-10 pt-6">
-        {error ? (
-          <div className="glass mb-6 rounded-2xl p-4 text-sm text-rose-200">
-            {error}
-          </div>
-        ) : null}
-
-        <div className="space-y-6">
-          <section className="glass relative overflow-hidden rounded-3xl p-6">
-            <div className="pointer-events-none absolute right-8 top-1/2 -translate-y-1/2 opacity-30">
-              {condition?.Icon ? (
-                <condition.Icon className="h-28 w-28 text-sky-400" />
-              ) : (
-                <Cloud className="h-28 w-28 text-sky-400" />
-              )}
+        {/* Main content */}
+        <main className="mx-auto w-full max-w-6xl px-4 pb-10 pt-6">
+          {error ? (
+            <div className="glass mb-6 rounded-2xl p-4 text-sm text-rose-200">
+              {error}
             </div>
-            <div className="mb-5 flex items-center gap-2 text-sm text-zinc-300">
-              <MapPin className="h-4 w-4" />
-              <span>{title}</span>
-            </div>
+          ) : null}
 
-            <CurrentWeatherCard
-              forecast={forecast}
-              isLoading={!forecast || isLoading}
-            />
-          </section>
-
-          <section className="glass rounded-3xl p-5">
-            <div className="mb-3 text-xs font-semibold tracking-widest text-zinc-400">
-              HOURLY FORECAST
-            </div>
-            <HourlyForecast
-              forecast={forecast}
-              isLoading={!forecast || isLoading}
-            />
-          </section>
-
-          <section className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-            <div className="glass rounded-3xl p-5 lg:col-span-5">
-              <div className="mb-3 text-xs font-semibold tracking-widest text-zinc-400">
-                7-DAY FORECAST
+          <div className="space-y-6">
+            <section className="glass relative overflow-hidden rounded-3xl p-6">
+              <div className="pointer-events-none absolute right-8 top-1/2 -translate-y-1/2 opacity-30">
+                {condition?.Icon ? (
+                  <condition.Icon className="h-28 w-28 text-sky-400" />
+                ) : (
+                  <Cloud className="h-28 w-28 text-sky-400" />
+                )}
               </div>
-              <Forecast7Day
+              <div className="mb-5 flex items-center gap-2 text-sm text-zinc-300">
+                <MapPin className="h-4 w-4" />
+                <span>{title}</span>
+              </div>
+
+              <CurrentWeatherCard
                 forecast={forecast}
                 isLoading={!forecast || isLoading}
               />
-            </div>
+            </section>
 
-            <div className="grid grid-cols-2 gap-4 lg:col-span-7 lg:grid-cols-4">
-              <MetricCard
-                label="Wind"
-                value={
-                  current
-                    ? `${Math.round(current.wind_speed_10m)} km/h`
-                    : "\u2014"
-                }
-                hint={
-                  current
-                    ? `${Math.round(current.wind_direction_10m)}°`
-                    : undefined
-                }
-                icon="wind"
+            <section className="glass rounded-3xl p-5">
+              <div className="mb-3 text-xs font-semibold tracking-widest text-zinc-400">
+                HOURLY FORECAST
+              </div>
+              <HourlyForecast
+                forecast={forecast}
+                isLoading={!forecast || isLoading}
               />
-              <MetricCard
-                label="Humidity"
-                value={
-                  current
-                    ? `${Math.round(current.relative_humidity_2m)}%`
-                    : "\u2014"
-                }
-                hint={
-                  current
-                    ? `Dew point: ${Math.round(current.dew_point_2m)}°`
-                    : undefined
-                }
-                icon="humidity"
-              />
-              <MetricCard
-                label="Visibility"
-                value={visibilityKm}
-                hint={visibilityM ? "Clear conditions" : undefined}
-                icon="visibility"
-              />
-              <MetricCard
-                label="Pressure"
-                value={
-                  current
-                    ? `${Math.round(current.surface_pressure)} hPa`
-                    : "\u2014"
-                }
-                hint={current ? "Normal" : undefined}
-                icon="pressure"
-              />
-              <MetricCard
-                label="UV Index"
-                value={uvLabel}
-                hint={uvHint}
-                icon="uv"
-              />
-              <MetricCard
-                label="Feels like"
-                value={
-                  current
-                    ? `${Math.round(current.apparent_temperature)}°`
-                    : "\u2014"
-                }
-                hint={condition?.label}
-                icon="feelsLike"
-              />
-              <MetricCard
-                label="Sunrise"
-                value={sunrise}
-                hint={forecast ? undefined : undefined}
-                icon="sunrise"
-              />
-              <MetricCard
-                label="Sunset"
-                value={sunset}
-                hint={forecast ? undefined : undefined}
-                icon="sunset"
-              />
-            </div>
-          </section>
-        </div>
+            </section>
+
+            <section className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+              <div className="glass rounded-3xl p-5 lg:col-span-5">
+                <div className="mb-3 text-xs font-semibold tracking-widest text-zinc-400">
+                  7-DAY FORECAST
+                </div>
+                <Forecast7Day
+                  forecast={forecast}
+                  isLoading={!forecast || isLoading}
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 lg:col-span-7 lg:grid-cols-4">
+                <MetricCard
+                  label="Wind"
+                  value={
+                    current
+                      ? `${Math.round(current.wind_speed_10m)} km/h`
+                      : "\u2014"
+                  }
+                  hint={
+                    current
+                      ? `${Math.round(current.wind_direction_10m)}°`
+                      : undefined
+                  }
+                  icon="wind"
+                />
+                <MetricCard
+                  label="Humidity"
+                  value={
+                    current
+                      ? `${Math.round(current.relative_humidity_2m)}%`
+                      : "\u2014"
+                  }
+                  hint={
+                    current
+                      ? `Dew point: ${Math.round(current.dew_point_2m)}°`
+                      : undefined
+                  }
+                  icon="humidity"
+                />
+                <MetricCard
+                  label="Visibility"
+                  value={visibilityKm}
+                  hint={visibilityM ? "Clear conditions" : undefined}
+                  icon="visibility"
+                />
+                <MetricCard
+                  label="Pressure"
+                  value={
+                    current
+                      ? `${Math.round(current.surface_pressure)} hPa`
+                      : "\u2014"
+                  }
+                  hint={current ? "Normal" : undefined}
+                  icon="pressure"
+                />
+                <MetricCard
+                  label="UV Index"
+                  value={uvLabel}
+                  hint={uvHint}
+                  icon="uv"
+                />
+                <MetricCard
+                  label="Feels like"
+                  value={
+                    current
+                      ? `${Math.round(current.apparent_temperature)}°`
+                      : "\u2014"
+                  }
+                  hint={condition?.label}
+                  icon="feelsLike"
+                />
+                <MetricCard
+                  label="Sunrise"
+                  value={sunrise}
+                  hint={forecast ? undefined : undefined}
+                  icon="sunrise"
+                />
+                <MetricCard
+                  label="Sunset"
+                  value={sunset}
+                  hint={forecast ? undefined : undefined}
+                  icon="sunset"
+                />
+              </div>
+            </section>
+          </div>
+        </main>
       </div>
     </div>
   );
