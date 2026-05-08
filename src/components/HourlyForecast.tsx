@@ -65,7 +65,7 @@ export function HourlyForecast(props: {
     .filter((idx) => idx < hourly.time.length)
 
   return (
-    <div className="grid grid-cols-6 gap-3 sm:grid-cols-8 lg:grid-cols-12">
+    <div className="grid grid-cols-6 gap-2 sm:grid-cols-12 sm:gap-2">
       {items.map((idx, i) => {
         const time = hourly.time[idx]
         const temp = hourly.temperature_2m[idx]
