@@ -1,73 +1,75 @@
-# React + TypeScript + Vite
+# SkyCast – Modern Weather Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A sleek, high-performance weather application built with a focus on data visualization and modern UI/UX principles. This project explores the synergy between React, TypeScript, and AI-assisted development workflows.
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Real-time Weather Data:** Accurate forecasts for any city worldwide.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Hourly Forecast:** Detailed hourly weather breakdown for the whole day.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Advanced 7-Day Forecast:** Featuring custom-built temperature range bars that visualize weekly extremes at a glance.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Metric Tiles:** Clean UI for Wind, Humidity, Visibility, Pressure, UV Index, and more.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+
+
+## 🛠️ Tech Stack
+
+
+
+- **Framework:** React 18 with Vite
+
+- **Language:** TypeScript
+
+- **Styling:** Tailwind CSS
+
+- **Icons:** Lucide React
+
+- **Development:** Built using Cursor AI & Claude 4.6 Sonnet for rapid prototyping and clean architecture.
+
+
+
+## 🚀 Development Workflow
+
+
+
+This project was developed using an **AI-augmented workflow**. By leveraging **Cursor** and **Claude**, I focused on high-level architecture and UI polish, while ensuring the underlying TypeScript logic remains clean and maintainable.
+
+
+
+
+## 📦 Getting Started
+
+
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/bartosz-kasprzyk/skycast-weather-app.git
+
+   ```
+
+
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+
+3. **Run the App:**
+
+   ```bash
+   npm run dev
+   ```
+
+
+No API setup required – the app uses public meteorological data (Open-Meteo) for seamless demonstration.
