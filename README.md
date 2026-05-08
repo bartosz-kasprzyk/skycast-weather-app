@@ -30,6 +30,8 @@ https://skycast-weather-app-bk.vercel.app/
 
 - **Icons:** Lucide React
 
+- **Design:** v0.app
+
 - **Development:** Built using Cursor AI & Claude 4.6 Sonnet for rapid prototyping and clean architecture.
 
 
